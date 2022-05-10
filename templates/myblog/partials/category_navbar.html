@@ -1,0 +1,18 @@
+<div class="collapse navbar-collapse subnav" id="navbarResponsive">
+    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'myblog:myblog' %}">خانه</a></li>
+        {% for cat in category %}
+          {% if cat.parent == None %}
+        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'myblog:category' cat.slug %}">{{cat.title}}</a>    <!--kode dovom navbare balayi ro neshun mide kode aval kalamate navbare balayi ro be tage marbute vasl mikone-->
+          {% if cat.children.active %}
+             {% include 'myblog/partials/category_loop.html' %}
+          {% endif %}
+        </li>
+           {% endif %}
+        {% endfor %}
+    </ul>
+    <form class="form-inline mt-3" action="{% url 'myblog:search' %}">
+      <input type="text" name="q" class="form-control" placeholder="جستوجوی متن">
+      <button class="btn btn-success" style="padding: 8px; border-radius: 5px; margin-right: 5px;">جستوجو</button>
+    </form>
+</div>

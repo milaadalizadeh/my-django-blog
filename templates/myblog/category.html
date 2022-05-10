@@ -1,0 +1,17 @@
+{% extends 'myblog/list.html' %}
+{% load static %}
+
+
+
+{% block header %}
+     <h3 class="alert alert-primery">دسته بندی : {{category.title}}</h3>
+{% endblock %}
+
+
+{% block previous_page_url %}
+{% url 'myblog:category' category.slug article.previous_page_number %}
+{% endblock %}
+
+{% block next_page_url %}
+{% url 'myblog:category' category.slug article.next_page_number %}
+{% endblock %}

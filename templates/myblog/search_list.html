@@ -1,0 +1,17 @@
+{% extends 'myblog/list.html' %}
+{% load static %}
+
+
+
+{% block header %}
+     <h3 class="alert alert-primery">جستوجو : {{search}}</h3>
+{% endblock %}
+
+
+{% block previous_page_url %}
+{% url 'myblog:search' page_obj.previous_page_number %}?q={{search}}
+{% endblock %}
+
+{% block next_page_url %}
+{% url 'myblog:search' page_obj.next_page_number %}?q={{search}}
+{% endblock %}

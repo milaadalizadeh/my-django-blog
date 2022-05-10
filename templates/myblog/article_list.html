@@ -1,0 +1,14 @@
+{% extends 'myblog/list.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block header %}
+{% endblock %}
+
+{% block previous_page_url %}
+{% url 'myblog:myblog' page_obj.previous_page_number %}
+{% endblock %}
+
+{% block next_page_url %}
+{% url 'myblog:myblog' page_obj.next_page_number %}
+{% endblock %}

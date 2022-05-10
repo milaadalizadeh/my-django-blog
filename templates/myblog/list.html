@@ -1,0 +1,81 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% load base_tags %}
+{% load ratings %}
+{% block title %}
+Milad |
+{% endblock %}
+{% load humanize %}
+
+
+{% block content %}
+<!-- Page Header-->
+  <header class="masthead" style="background-image: url('{% static 'assets/img/home-bg.jpg' %}')">
+      <div class="container position-relative px-4 px-lg-5">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+              <div class="col-md-10 col-lg-8 col-xl-7">
+                  <div class="site-heading">
+                      <h1>وبلاگ میلاد علیزاده</h1>
+                      <span class="subheading">پروژه جنگویی من</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
+
+<!-- Main Content-->
+       <div class="container px-4 px-lg-5">
+           <div class="row gx-4 gx-lg-5 justify-content-center">
+               <div class="col-md-10 col-lg-8 col-xl-7">
+                 {% block header %} {% endblock %}
+                 <aside>
+                 {% popular_articles %}
+                 {% hot_articles %}
+                 </aside>
+{% for i in article %}
+                   <!-- Post preview-->                                         <!--dakhele category kuchulu mire va hameye tagha + magale ha k in tago darand ro miyare-->
+                   <div class="post-preview">
+                       <a href="{% url 'myblog:post' i.slug %}">
+                           <h2 class="post-title">{{i.title}}
+                         {% if i.is_special %}
+                           <span class="badge badge-danger" style="font-size: 14px; color: #ae1d2f;">ویژه</span>
+                         {% endif %}
+                           </h2>
+                           <div>
+                               {% ratings i %}
+                           </div>
+                           <h3 class="post-subtitle">{{i.description|striptags|truncatewords:20}}</h3>
+                       </a>
+                       <p class="post-meta">
+                           نوشته شده توسط
+                           <a href="{% url 'myblog:author' i.author %}">{{i.author.get_full_name}}</a>
+                           {{i.publish|naturaltime}}
+                       </p>
+                       <div>
+                          {% for cat in i.category.active %}
+                            <a href="{% url 'myblog:category' cat.slug %}">#{{cat.title}}</a>
+                          {% endfor %}
+                       </div>
+                       <div>
+                         بازدید ها :{{i.hits.count}}
+                       </div>
+                   </div>
+                   <!-- Divider-->
+                 <hr class="my-4" />
+                   {% empty %}
+                   متاسفانه محتوایی برای نمایش وجود ندارد
+  {% endfor %}
+                   <!-- Pager-->
+                   <div class="d-flex justify-content-end mb-4">
+
+                       {% if page_obj.has_previous %}
+                   <a class="btn btn-primary text-uppercase ml-3" href="{% block previous_page_url %}{% endblock %}">پست های جدید &rarr;</a>
+                       {% endif %}
+                       {% if page_obj.has_next %}
+                   <a class="btn btn-primary text-uppercase" href="{% block next_page_url %}{% endblock %}">پست های قدیمی &larr;</a>
+                       {% endif %}
+                  </div>
+               </div>
+           </div>
+       </div>
+{% endblock %}

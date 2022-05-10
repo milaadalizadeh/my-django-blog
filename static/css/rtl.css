@@ -1,0 +1,63 @@
+@font-face {
+  font-family: Sahel;
+  src: url('Sahel.eot');
+  src: url('Sahel.eot?#iefix') format('embedded-opentype'),
+       url('Sahel.woff2') format('woff2'),
+       url('Sahel.woff') format('woff'),
+       url('Sahel.ttf') format('truetype');
+
+}
+
+
+body {
+  direction: rtl;
+  text-align: right;
+  font-family: "sahel";
+  font-size: 15px;
+  text-justify
+}
+
+
+.navbar-nav.ms-auto.py-4.py-lg-0 {
+    margin-left: initial !important;
+    margin-right: auto;
+}
+
+
+.post-meta {
+    text-align: left;
+}
+
+
+header.masthead .site-heading h1, header.masthead .site-heading .h1 {
+    font-size: 2rem;
+}
+
+
+
+
+
+
+aside {
+  width: 200px;
+  position: absolute;
+  left: 0px;
+  top: 540px;
+}
+
+.popular_articles {
+    border: 1px solid #bfbfbf;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    box-shadow: -5px 5px;
+}
+
+
+/* Style the form - display items horizontally */
+.form-inline {
+  display: flex !important;
+  flex-flow: row wrap !important;
+  align-items: center !important;
+}

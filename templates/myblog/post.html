@@ -1,0 +1,62 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% load base_tags %}
+{% load ratings %}
+{% load comment_tags %}
+{% block title %}
+ {{article.title}}
+{% endblock %}
+{% load humanize %}
+
+
+
+{% block content %}
+<!-- Page Header-->
+  <header class="masthead" style="background-image: url('{{article.thumbnail.url}}')">
+      <div class="container position-relative px-4 px-lg-5">
+          <div class="row gx-4 gx-lg-5 justify-content-center">
+              <div class="col-md-10 col-lg-8 col-xl-7">
+                  <div class="site-heading">
+                      <h1>{{article.title}}</h1>
+                      {% if article.is_special %}
+                        <span class="badge badge-danger" style="font-size: 14px; color: #ae1d2f;">ویژه</span>
+                      {% endif %}
+                      <time>{{article.publish|naturaltime}}</time>
+                      <div>
+                        {% ratings article %}
+                      </div>
+                      <div>
+                        بازدید ها :{{article.hits.count}}
+                      </div>
+                      <!--span class="subheading">مجری پروژه های حفاظت کاتدیک</span-->
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
+
+
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5 text-justify">
+                <div class="row gx-4 gx-lg-5 justify-content-center text-justify">
+                    <div class="col-md-10 col-lg-8 col-xl-7 text-justify">
+                      {% if article.is_special %}
+                                 {% if user.is_authenticated and user.is_special_user or user == object.author or user.is_superuser %}
+                                    {{article.description|safe}}                           <!-- linebreaks baraye joda kardane pragraf ha az ham karbord darad-->
+                                 {% else %}
+                                 {{article.description|striptags|truncatewords:20}}
+                                 <p class="alert alert-warning">این مقاله ویژه است و برای مشاهده آن باید <a class="alert-link" href="#">اشتراک ویژه</a> تهیه نمایید</p>
+                                 {% endif %}
+                      {% else %}
+                                {{article.description|safe}}
+                      {% endif %}
+
+                      {% render_comments article request %}
+                      {% include_bootstrap %}
+                    </div>
+                </div>
+            </div>
+        </article>
+
+{% endblock %}

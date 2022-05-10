@@ -1,0 +1,34 @@
+@font-face {
+  font-family: Sahel;
+  src: url('Sahel.eot');
+  src: url('Sahel.eot?#iefix') format('embedded-opentype'),
+       url('Sahel.woff2') format('woff2'),
+       url('Sahel.woff') format('woff'),
+       url('Sahel.ttf') format('truetype');
+
+}
+
+
+body {
+  direction: rtl;
+  text-align: right;
+  font-family: "sahel";
+  font-size: 15px;
+  text-justify
+}
+
+
+.navbar-nav.ms-auto.py-4.py-lg-0 {
+    margin-left: initial !important;
+    margin-right: auto;
+}
+
+
+.post-meta {
+    text-align: left;
+}
+
+
+header.masthead .site-heading h1, header.masthead .site-heading .h1 {
+    font-size: 2rem;
+}
